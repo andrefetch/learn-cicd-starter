@@ -15,7 +15,7 @@ func TestApiKeyFromAuth(t *testing.T) {
 		log.Fatalf("error: %v", err)
 	}
 
-	want := "Test1234s"
+	want := "Test1234"
 
 	if got != want {
 		t.Errorf("GetApiKey() = %q, want %q", got, want)
