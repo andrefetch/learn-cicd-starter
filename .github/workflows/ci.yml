@@ -41,7 +41,12 @@ jobs:
           go-version: "1.27.1"
 
       - name: Check Go Formatting
-        run: test -z "$(gofmt -l .)"
+        run: |
+          unformatted=$(git ls-files -z -- '*.go' ':!:vendor/**' | xargs -0 gofmt -l)
+          if [ -n "$unformatted" ]; then
+            printf 'Go files need formatting:\n%s\n' "$unformatted"
+            exit 1
+          fi
 
       - name: Install staticcheck
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
