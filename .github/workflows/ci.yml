@@ -31,6 +31,5 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Check Go Formatting
-        run: |
-          test -z "$(gofmt -l $(git ls-files '*.go'))"
+        run: test -z $(go fmt ./...)
 
